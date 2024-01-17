@@ -18,26 +18,22 @@ ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
 
 void solve(vll arr, ll n, ll f, ll a, ll b)
 {
-    int point1 = arr[0];
-    for (int i = 1; i < n; i++)
+    ll prev = 0;
+    ll sum = 0;
+    for (int i = 0; i < n; i++)
     {
-        point1 += arr[i] - arr[i - 1];
+        ll switch_off = b;
+        ll com_on = a * abs(arr[i] - prev);
+        ll sol = min(switch_off, com_on);
+        sum += sol;
+        prev = arr[i];
     }
-    point1 = point1 * a;
-    int point2 = 1;
-    point2 *= n;
-    point2 = point2 * b;
-    // int ans = min(point1, point2);
-    // cout << point1 << " " << point2 << endl;
-    // return;
-    if (point1 > f || point2 > f)
+    if (sum >= f)
     {
         cout << "NO" << endl;
+        return;
     }
-    else
-    {
-        cout << "YES" << endl;
-    }
+    cout << "YES" << endl;
 }
 int main()
 {
