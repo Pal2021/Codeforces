@@ -29,17 +29,49 @@ void solve(string a, string b, string c)
     cout << "NO" << endl;
     return;
 }
+void bfs(vector<int> adj[], int V, int E)
+{
+    int vis[V + 1] = {0};
+    vis[1] = 1;
+    queue<int> q;
+    q.push(1);
+    while (!q.empty())
+    {
+        int node = q.front();
+        q.pop();
+        cout << node << " ";
+        for (auto it : adj[node])
+        {
+            if (!vis[it])
+            {
+                q.push(it);
+                vis[it] = 1;
+            }
+        }
+    }
+}
+
 int main()
 {
-    int t;
-    cin >> t;
-    while (t--)
+    int V, E;
+    cin >> V >> E;
+    vector<int> adj[V + 1];
+    for (int i = 1; i <= E; i++)
     {
-        int n;
-        cin >> n;
-        string a, b, c;
-        cin >> a >> b >> c;
-        solve(a, b, c);
+        int v, u;
+        cin >> v >> u;
+        adj[v].push_back(u);
+        adj[u].push_back(v);
     }
+    // for (int i = 1; i <= V; i++)
+    // {
+    //     cout << i << "->";
+    //     for (auto it : adj[i])
+    //     {
+    //         cout << it << " ";
+    //     }
+    //     cout << endl;
+    // }
+    bfs(adj, V, E);
     return 0;
 };

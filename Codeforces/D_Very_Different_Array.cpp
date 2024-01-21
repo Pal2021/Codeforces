@@ -15,47 +15,36 @@ ll gcd(ll a, ll b)
     return gcd(b, a % b);
 }
 ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
-void solve(vll arr1, vll arr2, ll n, ll m)
+
+void addEdge(vector<int> adj[], int u, int v)
 {
-    sort(arr1.begin(), arr1.end());
-    sort(arr2.begin(), arr2.end(), greater<ll>());
-    int i1 = 0, j1 = n - 1;
-    int i2 = 0, j2 = m - 1;
-    ll sum = 0;
-    while (i1 <= j1)
+    adj[u].push_back(v);
+    adj[v].push_back(u);
+}
+
+void printGraph(vector<int> adj[], int V)
+{
+    for (int v = 0; v < V; ++v)
     {
-        if (abs(arr1[i1] - arr2[i2]) < abs(arr1[j1] - arr2[j2])) // Corrected here
-        {
-            sum += abs(arr1[j1] - arr2[j2]); // And here
-            j1--, j2--;
-        }
-        else
-        {
-            sum += abs(arr1[i1] - arr2[i2]);
-            i1++, i2++;
-        }
+        cout << v << "->";
+        for (auto x : adj[v])
+            cout << x << ", ";
+        cout << endl;
     }
-    cout << sum << endl;
 }
 
 int main()
 {
-    int t;
-    cin >> t;
-    while (t--)
+    int V, E;
+    cin >> V >> E;
+    vector<int> adj[V];
+    for (int i = 0; i < E; i++)
     {
-        ll n, m;
-        cin >> n >> m;
-        vector<ll> a1(n), a2(m);
-        for (int i = 0; i < n; i++)
-        {
-            cin >> a1[i];
-        }
-        for (int i = 0; i < m; i++)
-        {
-            cin >> a2[i];
-        }
-        solve(a1, a2, n, m);
+        int u, v;
+        cin >> u >> v;
+        addEdge(adj, u, v);
     }
+
+    printGraph(adj, V);
     return 0;
-};
+}
