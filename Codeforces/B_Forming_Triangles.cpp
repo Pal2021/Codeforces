@@ -15,37 +15,29 @@ ll gcd(ll a, ll b)
     return gcd(b, a % b);
 }
 ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
-void solve(vll arr, ll n)
+void solve(string s)
 {
-    sort(arr.begin(), arr.end());
-    ll ans = 0;
-    vector<int> prefix(n + 1, 0);
-    for (int i = n - 1; i >= 0; i--)
+    vector<int> ans(s.size(), 0);
+    for (int i = 1; i < s.size(); i++)
     {
-        prefix[i] = prefix[i + 1] + arr[i];
+        int j = 0;
+        int c = 0;
+        while (j < s.size() && s[j] == s[j + i])
+        {
+            c++;
+            j++;
+        }
+        ans[i] = c;
     }
-
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < ans.size(); i++)
     {
-        int k = lower_bound(arr.begin(), arr.end(), arr[i] + arr[i]) - arr.begin();
-        ans += max(0ll, prefix[k] - prefix[i + 1] - arr[i] * (k - i - 1));
+        cout << ans[i] << " ";
     }
-    cout << ans << endl;
 }
 int main()
 {
-    int t;
-    cin >> t;
-    while (t--)
-    {
-        ll n;
-        cin >> n;
-        vector<ll> a(n);
-        for (int i = 0; i < n; i++)
-        {
-            cin >> a[i];
-        }
-        solve(a, n);
-    }
+    string s;
+    cin >> s;
+    solve(s);
     return 0;
 };

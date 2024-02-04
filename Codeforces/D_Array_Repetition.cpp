@@ -15,61 +15,61 @@ ll gcd(ll a, ll b)
     return gcd(b, a % b);
 }
 ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
-void solve(vpii vpi, vll arr, ll n)
+void solve(ll n, ll k)
 {
-    vll ans;
-    vll ans1;
-    for (auto it : vpi)
+    if (n < k)
     {
-        if (it.first == 1)
+        cout << 0 << endl;
+    }
+    else if (n == k)
+    {
+        for (int i = 1; i <= n; i++)
         {
-            ans.push_back(it.second);
-            ans.push_back(it.second);
+            cout << i << " ";
         }
-        else if (it.first == 2)
+        cout << endl;
+    }
+    else
+    {
+        if (n / 2 >= k)
         {
-            ans.push_back(it.second);
-            ans.push_back(it.second);
-            ans.push_back(it.second);
-            ans.push_back(it.second);
+            if (n % 2 == 0)
+            {
+                for (int i = n; i > 0 && k--; i = i - 2)
+                {
+                    cout << i << " ";
+                }
+                cout << endl;
+            }
+            else
+            {
+                for (int i = n - 1; i > 0 && k--; i = i - 2)
+                {
+                    cout << i << " ";
+                }
+                cout << endl;
+            }
+        }
+        else
+        {
+            for (int i = n; i > 0 && k--; i--)
+            {
+                cout << i << " ";
+            }
+            cout << endl;
         }
     }
-    for (int i = 0; i < ans.size(); i++)
-    {
-        cout << ans[i] << " ";
-    }
-    cout << endl;
-    // for (int i = 0; i < n; i++)
-    // {
-    //     ans1.push_back(ans[i + 1]);
-    // }
-    // for (int i = 0; i < ans1.size(); i++)
-    // {
-    //     cout << ans1[i] << " ";
-    // }
-    // cout << endl;
 }
+
 int main()
 {
-    int t;
-    cin >> t;
-    while (t--)
+    int T;
+    cin >> T;
+    while (T--)
     {
-        ll k, n;
-        cin >> k >> n;
-        vpii vpi;
-        while (k--)
-        {
-            ll n1, n2;
-            cin >> n1 >> n2;
-            vpi.push_back({n1, n2});
-        }
-        vll arr(n);
-        for (int i = 0; i < n; i++)
-        {
-            cin >> arr[i];
-        }
-        solve(vpi, arr, n);
+        ll n, k;
+        cin >> n >> k;
+        solve(n, k);
     }
     return 0;
-};
+}
