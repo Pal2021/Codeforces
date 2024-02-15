@@ -15,61 +15,38 @@ ll gcd(ll a, ll b)
     return gcd(b, a % b);
 }
 ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
-void solve(ll n, ll k)
+void solve(ll n, ll k, vll nums)
 {
-    if (n < k)
+    map<int, int> mp;
+    int sum = 0;
+    int maxi = INT_MAX;
+    for (int i = 0; i < n; i++)
     {
-        cout << 0 << endl;
-    }
-    else if (n == k)
-    {
-        for (int i = 1; i <= n; i++)
+        sum += nums[i];
+        if (sum == k)
         {
-            cout << i << " ";
+            maxi = min(maxi, i);
         }
-        cout << endl;
-    }
-    else
-    {
-        if (n / 2 >= k)
+        if (mp.find(sum - k) != mp.end())
         {
-            if (n % 2 == 0)
-            {
-                for (int i = n; i > 0 && k--; i = i - 2)
-                {
-                    cout << i << " ";
-                }
-                cout << endl;
-            }
-            else
-            {
-                for (int i = n - 1; i > 0 && k--; i = i - 2)
-                {
-                    cout << i << " ";
-                }
-                cout << endl;
-            }
+
+            maxi = min(maxi, abs(i - mp[sum - k]));
         }
-        else
-        {
-            for (int i = n; i > 0 && k--; i--)
-            {
-                cout << i << " ";
-            }
-            cout << endl;
-        }
+        mp[sum] = i;
     }
+    cout << maxi << endl;
 }
 
 int main()
 {
-    int T;
-    cin >> T;
-    while (T--)
+
+    ll n, t;
+    cin >> n >> t;
+    vector<ll> nums(n);
+    for (int i = 0; i < n; i++)
     {
-        ll n, k;
-        cin >> n >> k;
-        solve(n, k);
+        cin >> nums[i];
     }
-    return 0;
+
+    solve(n, t, nums);
 }
