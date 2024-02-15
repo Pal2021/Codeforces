@@ -15,31 +15,31 @@ ll gcd(ll a, ll b)
     return gcd(b, a % b);
 }
 ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
-void solve(string s)
+void solve(ll n, vll nums)
 {
-    vector<int> ans(s.size(
-        
-    ), 0);
-    for (int i = 1; i < s.size(); i++)
+    int ans = 0;
+    sort(nums.begin(), nums.end());
+    for (int i = 1; i < n; i++)
     {
-        int j = 0;
-        int c = 0;
-        while (j < s.size() && s[j] == s[j + i])
-        {
-            c++;
-            j++;
-        }
-        ans[i] = c;
+        ans += nums[i] - nums[i - 1];
     }
-    for (int i = 0; i < ans.size(); i++)
-    {
-        cout << ans[i] << " ";
-    }
+    cout << ans << endl;
 }
+
 int main()
 {
-    string s;
-    cin >> s;
-    solve(s);
-    return 0;
-};
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        ll n;
+        cin >> n;
+        vector<ll> nums(n);
+        for (int i = 0; i < n; i++)
+        {
+            cin >> nums[i];
+        }
+
+        solve(n, nums);
+    }
+}
