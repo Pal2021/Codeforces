@@ -15,22 +15,32 @@ ll gcd(ll a, ll b)
     return gcd(b, a % b);
 }
 ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
-void solve(ll n, ll d)
+
+void solve(vector<ll> arr, ll n)
 {
-    if ((4 * n - 2) == (d))
+
+    int c = 0;
+    for (int i = 0; i < n; i++)
     {
-        cout << n * 2 << endl;
-        return;
+
+        c += abs(arr[i]);
     }
-    cout << (d + 1) / 2 << endl;
+    cout << c << endl;
 }
 
 int main()
 {
-    string s;
-    cin >> s;
-
-    ll n;
-    cin >> n >> d;
-    solve(n, d);
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        ll n;
+        cin >> n;
+        vector<ll> arr(n);
+        for (int i = 0; i < n; i++)
+        {
+            cin >> arr[i];
+        }
+        solve(arr, n);
+    }
 }

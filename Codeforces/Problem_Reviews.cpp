@@ -32,9 +32,26 @@ void solve(string s1, string s2, int n, int k)
 
 int main()
 {
-    int n, k;
-    cin >> n >> k;
-    string s1, s2;
-    cin >> s1 >> s2;
-    solve(s1, s2, n, k);
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        int N;
+        cin >> N;
+
+        bool isGood = true;
+
+        for (int i = 0; i < N; ++i)
+        {
+            int score;
+            cin >> score;
+
+            if (score <= 4)
+            {
+                isGood = false;
+            }
+        }
+
+        cout << (isGood ? "YES" : "NO") << endl;
+    }
 }
