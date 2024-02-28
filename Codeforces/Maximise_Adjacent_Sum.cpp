@@ -17,14 +17,21 @@ ll gcd(ll a, ll b)
 ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
 void solve(int n, vector<int> arr)
 {
-    int total_people = 0;
-    for (int i = 0; i < n; ++i)
+    sort(arr.begin(), arr.end());
+    swap(arr[1], arr[n - 1]);
+    int sum = 0;
+    for (int i = 0; i < n; i++)
     {
-
-        total_people += arr[i];
+        if (i == 0 || i == n - 1)
+        {
+            sum += arr[i];
+        }
+        else
+        {
+            sum = sum + 2 * arr[i];
+        }
     }
-    int rooms_needed = ceil((double)total_people / 2);
-    cout << rooms_needed << endl;
+    cout << sum << endl;
 }
 
 int main()
@@ -44,6 +51,6 @@ int main()
             cin >> A[i];
             total_people += A[i];
         }
-        solve(N, arr);
+        solve(N, A);
     }
 }

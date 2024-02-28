@@ -21,10 +21,10 @@ void solve(int n, vector<int> arr)
     for (int i = 0; i < n; ++i)
     {
 
-        total_people += arr[i];
+        total_people += (arr[i] + 1) / 2;
     }
-    int rooms_needed = ceil((double)total_people / 2);
-    cout << rooms_needed << endl;
+
+    cout << total_people << endl;
 }
 
 int main()
@@ -44,6 +44,6 @@ int main()
             cin >> A[i];
             total_people += A[i];
         }
-        solve(N, arr);
+        solve(N, A);
     }
 }
