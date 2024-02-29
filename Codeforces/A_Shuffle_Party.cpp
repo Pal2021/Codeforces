@@ -15,31 +15,37 @@ ll gcd(ll a, ll b)
     return gcd(b, a % b);
 }
 ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
-void solve(string s)
+void solve(ll n)
 {
-    vector<int> arr(26, 0);
-    for (int i = 0; i < s.size(); i++)
+    ll i = 2;
+    if (n <= 1)
     {
-        arr[s[i] - 'a']++;
+        cout << 1 << endl;
+        return;
     }
-    int maxi = INT_MIN;
-    int mini = INT_MAX;
-    for (int i = 0; i < 26; i++)
+    while (i <= n)
     {
-        maxi = max(maxi, arr[i]);
-        if (arr[i] != 0)
+        if (i * 2 <= n)
         {
-            mini = min(mini, arr[i]);
+            i = i * 2;
+        }
+        else
+        {
+            break;
         }
     }
-    cout << maxi << " " << mini << endl;
+    cout << i << endl;
 }
 
 int main()
 {
-    string s;
-
-    cin >> s;
-    solve(s);
+    ll t;
+    cin >> t;
+    while (t--)
+    {
+        ll n;
+        cin >> n;
+        solve(n);
+    }
     return 0;
 }
